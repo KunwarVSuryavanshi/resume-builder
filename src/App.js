@@ -1,22 +1,11 @@
 import './App.css';
-import ReactToPDF from '@kunwarji/react-to-pdf'
-import { useRef } from 'react'
+import FirstResume from './Resumes/FirstResume';
+
 
 function App() {
-  const refVar = useRef()
   return (
     <div>
-      <ReactToPDF element={refVar} scale={1}>
-        {(toPdf) => (
-          <button type="button" onClick={toPdf}>
-            Click me
-          </button>
-        )
-        }
-      </ReactToPDF>
-      <div ref={refVar}>
-        Something inside APP.js
-      </div>
+      <FirstResume/>
     </div>
   );
 }
