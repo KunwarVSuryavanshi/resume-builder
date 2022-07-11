@@ -3,7 +3,7 @@ import { Grid, TextField, ThemeProvider } from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import {theme as TextFieldTheme} from './TextFieldTheme'
-
+import './style.scss'
 
 function FirstResume() {
   const [email, setEmail] = useState('')
@@ -104,10 +104,20 @@ function FirstResume() {
   return (
     <ThemeProvider theme={TextFieldTheme}>
       <div className='body'>
-        <Container>
+        <Container style={{margin: 'auto'}}>
           <Grid container>
             {headerContent()}
           </Grid>
+          <div className='flex-container'>
+            <div className="item1_container">
+              <div className="item1_container_1">asdasdasdasdasd</div>
+              <div className="item1_container_2">asd</div>
+            </div>
+            <div className="item2_container">
+              <div className="item1_container_1">qwe</div>
+              <div className="item1_container_2">qwe</div>
+            </div>
+          </div>
         </Container>
       </div>
     </ThemeProvider>

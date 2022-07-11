@@ -1,0 +1,32 @@
+.flex-container {
+  display: flex;
+  background-color: rgb(149, 201, 246);
+  min-height: 20vh;
+  flex-direction: row;
+  justify-content: space-around;
+  // align-items: stretch;
+  .item1_container {
+    display: flex;
+    background-color: aqua;
+    flex-grow: 1;
+    flex-direction: column;
+    &_1 {
+      background-color: antiquewhite;
+    }
+    &_2 {
+      background-color: bisque;
+    }
+  }
+  .item2_container {
+    display: flex;
+    background-color: aqua;
+    flex-grow: 1;
+    flex-direction: column;
+    &_1 {
+      background-color: antiquewhite;
+    }
+    &_2 {
+      background-color: bisque;
+    }
+  }
+}

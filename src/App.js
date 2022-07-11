@@ -1,5 +1,5 @@
 import './App.css';
-import FirstResume from './Resumes/FirstResume/FirstResume';
+import FirstResume from './Resumes/FirstResumeTemplate/FirstResume';
 
 
 function App() {
