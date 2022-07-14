@@ -145,7 +145,6 @@ function FirstResume() {
                       '& .MuiFilledInput-underline': {
                         fontSize: '1rem',
                         fontWeight: 'semi-bold',
-                        // width: 'vw',
                       }
                     }}
                     onClick={handleClick}
@@ -186,7 +185,6 @@ function FirstResume() {
                     '& .MuiFilledInput-underline': {
                       fontSize: '1rem',
                       fontWeight: 'semi-bold',
-                      // width: 'vw',
                     }
                   }}
                   onClick={handleClick}
