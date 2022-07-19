@@ -11,25 +11,19 @@
     flex-grow: 1;
     flex-direction: column;
     margin: 25px 25px 20px 0px;
-    // &_1{
-    //   &_ed{
+    &_1{
+      // &_ed{
 
-    //   }
-    //   &_details{
-    //     // width: 20vw;
-    //   }
-    // }
+      // }
+      &_details{
+        min-height: 20vh;
+      }
+    }
   }
   .item2_container {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     margin: 25px 0px 20px 25px;
-    &_1 {
-      // background-color: antiquewhite;
-    }
-    &_2 {
-      // background-color: bisque;
-    }
   }
 }

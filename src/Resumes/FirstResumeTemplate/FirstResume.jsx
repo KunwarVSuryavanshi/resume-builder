@@ -1,5 +1,5 @@
 import { Mail, Phone, PlaylistAdd } from '@mui/icons-material'
-import { Grid, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Grid, TextField, ThemeProvider } from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import {theme as TextFieldTheme} from './TextFieldTheme'
@@ -92,18 +92,59 @@ function FirstResume() {
     )
   }
 
-  const handleOnBlur = (e) => {
-    console.log("On blur called", e.target.value)
+  const educationDetails = () => {
+    return (
+      <>
+        < TextField
+          hiddenLabel
+          placeholder="Program Name"
+          variant='filled'
+          size='medium'
+          margin="normal"
+          fullWidth
+          sx={{
+            '& .MuiFilledInput-underline': {
+              fontSize: '1rem',
+              fontWeight: 'semi-bold',
+            }
+          }
+          }
+          // onClick={handleClick}
+          // onBlur={handleOnBlur}
+        />
+        <TextField
+          hiddenLabel
+          placeholder="School / Institute name"
+          variant='filled'
+          size='medium'
+          margin="normal"
+          fullWidth
+          sx={{
+            '& .MuiFilledInput-underline': {
+              fontSize: '1rem',
+              fontWeight: 'semi-bold',
+            }
+          }}
+        />
+      </>
+    )
+  }
+
+  const handleBlur = (e) => {
+    e.preventDefault()
+    if(e.currentTarget.contains(e.relatedTarget)) return
+    // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
     setToggleRow(false)
   }
 
   const handleClick = (e) => {
-    console.log("Handle click being called", e)
+    e.preventDefault()
     setToggleRow(true)
   }
 
   const addNewRow = () => {
-    console.log("NEW ROW CALLED")
+    const element = document.getElementById('detailsDiv')
+    console.log(element)
   }
 
   return (
@@ -117,41 +158,10 @@ function FirstResume() {
             <div className="item1_container">
               <div className="item1_container_1">
                 <div className="item1_container_1_ed">Education</div>
-                <div className="item1_container_1_details">
-                  <TextField
-                    hiddenLabel
-                    placeholder="Program Name"
-                    variant='filled'
-                    size='medium'
-                    margin="normal"
-                    fullWidth
-                    sx={{
-                      '& .MuiFilledInput-underline': {
-                        fontSize: '1rem',
-                        fontWeight: 'semi-bold',
-                      }
-                    }}
-                    onClick={handleClick}
-                    onBlur={handleOnBlur}
-                  />
-                  <TextField
-                    hiddenLabel
-                    placeholder="School / Institute name"
-                    variant='filled'
-                    size='medium'
-                    margin="normal"
-                    fullWidth
-                    sx={{
-                      '& .MuiFilledInput-underline': {
-                        fontSize: '1rem',
-                        fontWeight: 'semi-bold',
-                      }
-                    }}
-                    onClick={handleClick}
-                    onBlur={handleOnBlur}
-                  />
+                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={handleClick} onBlur={(e) => handleBlur(e)}>
+                  {educationDetails()}
+                  {toggleRow && <PlaylistAdd onClick={ addNewRow } />}
                 </div>
-                {toggleRow && <PlaylistAdd onClick={ addNewRow} />}
               </div>
               <div className="item1_container_2">
 
