@@ -4,10 +4,12 @@ import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import {theme as TextFieldTheme} from './TextFieldTheme'
 import './style.scss'
+import EducationDetails from './EducationDetails'
 
 function FirstResume() {
   const [email, setEmail] = useState('')
   const [toggleRow, setToggleRow] = useState(false)
+  const [details, setDetails] = useState([<EducationDetails/>])
 
   const headerContent = () => {
     return (
@@ -92,44 +94,6 @@ function FirstResume() {
     )
   }
 
-  const educationDetails = () => {
-    return (
-      <>
-        < TextField
-          hiddenLabel
-          placeholder="Program Name"
-          variant='filled'
-          size='medium'
-          margin="normal"
-          fullWidth
-          sx={{
-            '& .MuiFilledInput-underline': {
-              fontSize: '1rem',
-              fontWeight: 'semi-bold',
-            }
-          }
-          }
-          // onClick={handleClick}
-          // onBlur={handleOnBlur}
-        />
-        <TextField
-          hiddenLabel
-          placeholder="School / Institute name"
-          variant='filled'
-          size='medium'
-          margin="normal"
-          fullWidth
-          sx={{
-            '& .MuiFilledInput-underline': {
-              fontSize: '1rem',
-              fontWeight: 'semi-bold',
-            }
-          }}
-        />
-      </>
-    )
-  }
-
   const handleBlur = (e) => {
     e.preventDefault()
     if(e.currentTarget.contains(e.relatedTarget)) return
@@ -143,8 +107,7 @@ function FirstResume() {
   }
 
   const addNewRow = () => {
-    const element = document.getElementById('detailsDiv')
-    console.log(element)
+    setDetails([...details, <EducationDetails/>])
   }
 
   return (
@@ -159,7 +122,7 @@ function FirstResume() {
               <div className="item1_container_1">
                 <div className="item1_container_1_ed">Education</div>
                 <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={handleClick} onBlur={(e) => handleBlur(e)}>
-                  {educationDetails()}
+                  {details.map(item => item)}
                   {toggleRow && <PlaylistAdd onClick={ addNewRow } />}
                 </div>
               </div>
