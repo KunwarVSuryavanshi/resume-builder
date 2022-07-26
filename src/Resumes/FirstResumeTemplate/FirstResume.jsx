@@ -102,7 +102,7 @@ function FirstResume() {
   }
 
   const handleClick = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     setToggleRow(true)
   }
 
@@ -123,7 +123,7 @@ function FirstResume() {
                 <div className="item1_container_1_ed">Education</div>
                 <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={handleClick} onBlur={(e) => handleBlur(e)}>
                   {details.map(item => item)}
-                  {toggleRow && <PlaylistAdd onClick={ addNewRow } />}
+                  {toggleRow && <PlaylistAdd className='addbtn' onClick={ addNewRow } />}
                 </div>
               </div>
               <div className="item1_container_2">
@@ -163,7 +163,12 @@ function FirstResume() {
                   onClick={handleClick}
                 />
               </div>
-              <div className="item2_container_2"></div>
+              <div className="item2_container_2">
+                <span className='fromDate'>
+                  <label>From:</label>
+                  <input type="date" />
+                </span>
+              </div>
             </div>
           </div>
         </Container>

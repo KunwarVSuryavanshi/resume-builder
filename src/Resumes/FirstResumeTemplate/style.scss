@@ -17,6 +17,9 @@
       // }
       &_details{
         min-height: 20vh;
+        .addbtn{
+          padding-top: 3vh;
+        }
       }
     }
   }
@@ -25,5 +28,34 @@
     flex-grow: 1;
     flex-direction: column;
     margin: 25px 0px 20px 25px;
+  }
+}
+
+.educationDetails{
+  padding-bottom: 2vh;
+  .fromDate{
+    label{
+      padding-right: 0.5vw;
+    }
+    input{
+      border: none;
+    }
+    input::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      -webkit-appearance: none;
+     }
+  }
+  .toDate{
+    padding-left: 2vw;
+    label{
+      padding-right: 0.5vw;
+    }
+    input{
+      border: none;
+    }
+    input::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      -webkit-appearance: none;
+    }
   }
 }

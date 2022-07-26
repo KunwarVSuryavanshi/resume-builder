@@ -1,9 +1,15 @@
 import React from 'react'
 import { TextField } from '@mui/material'
+import './style.scss'
 
 function EducationDetails() {
+
+  const handleBlur = () => {
+    console.log("HANDLE BLUR")
+  }
+
   return (
-    <div>
+    <div className='educationDetails'>
       < TextField
         hiddenLabel
         placeholder="Program Name"
@@ -35,6 +41,14 @@ function EducationDetails() {
           }
         }}
       />
+      <span className='fromDate'>
+        <label>From:</label>
+        <input type="date" onBlur={handleBlur}/>
+      </span>
+      <span className='toDate'>
+        <label>To:</label>
+        <input type="date" />
+      </span>
     </div>
   )
 }
