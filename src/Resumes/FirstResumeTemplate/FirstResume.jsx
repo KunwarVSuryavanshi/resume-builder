@@ -5,11 +5,15 @@ import React, { useState } from 'react'
 import {theme as TextFieldTheme} from './TextFieldTheme'
 import './style.scss'
 import EducationDetails from './EducationDetails'
+import WorkExperience from './WorkExperience'
 
 function FirstResume() {
+  
   const [email, setEmail] = useState('')
-  const [toggleRow, setToggleRow] = useState(false)
+  const [toggleEduRow, setToggleEduRow] = useState(false)
   const [details, setDetails] = useState([<EducationDetails/>])
+  const[toggleExpRow, setToggleExpRow] = useState(false)
+  const [workExp, setWorkExp] = useState([<WorkExperience />])
 
   const headerContent = () => {
     return (
@@ -94,20 +98,47 @@ function FirstResume() {
     )
   }
 
-  const handleBlur = (e) => {
+  const handleBlur = (e, region) => {
     e.preventDefault()
     if(e.currentTarget.contains(e.relatedTarget)) return
     // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
-    setToggleRow(false)
+    switch (region) {
+      case 'edu':
+        setToggleEduRow(false)
+        break;
+      case 'exp':
+        setToggleExpRow(false)
+        break;
+      default:
+        return;
+    }
   }
 
-  const handleClick = (e) => {
+  const handleClick = (region) => {
     // e.preventDefault()
-    setToggleRow(true)
+    switch (region) {
+      case 'edu':
+        setToggleEduRow(true)
+        break;
+      case 'exp':
+        setToggleExpRow(true)
+        break;
+      default:
+        return;
+    }
   }
 
-  const addNewRow = () => {
-    setDetails([...details, <EducationDetails/>])
+  const addNewRow = (region) => {
+    switch (region){
+      case 'edu':
+        setDetails([...details, <EducationDetails />])
+        break;
+      case 'exp':
+        setWorkExp([...workExp, <WorkExperience />])
+        break;
+      default:
+        return;
+    }
   }
 
   return (
@@ -121,13 +152,17 @@ function FirstResume() {
             <div className="item1_container">
               <div className="item1_container_1">
                 <div className="item1_container_1_ed">Education</div>
-                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={handleClick} onBlur={(e) => handleBlur(e)}>
+                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('edu')} onBlur={(e) => handleBlur(e, 'edu')}>
                   {details.map(item => item)}
-                  {toggleRow && <PlaylistAdd className='addbtn' onClick={ addNewRow } />}
+                  {toggleEduRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('edu') } />}
                 </div>
               </div>
               <div className="item1_container_2">
-
+                <div className="item1_container_1_ed">Work Experience</div>
+                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('exp')} onBlur={(e) => handleBlur(e, 'exp')}>
+                  {workExp.map(item => item)}
+                  {toggleExpRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('exp')} />}
+                </div>
               </div>
             </div>
             <div className="item2_container">
