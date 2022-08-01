@@ -1,5 +1,5 @@
 import { Mail, Phone, PlaylistAdd } from '@mui/icons-material'
-import { Grid, TextField, ThemeProvider } from '@mui/material'
+import { Chip, Grid, TextField, ThemeProvider } from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
 import {theme as TextFieldTheme} from './TextFieldTheme'
@@ -14,6 +14,9 @@ function FirstResume() {
   const [details, setDetails] = useState([<EducationDetails/>])
   const[toggleExpRow, setToggleExpRow] = useState(false)
   const [workExp, setWorkExp] = useState([<WorkExperience />])
+  const [skill, setSkill] = useState([])
+  const [skillInp, setSkillInp] = useState('')
+  const [skillToggle, setSkillToggle] = useState(true)
 
   const headerContent = () => {
     return (
@@ -109,6 +112,9 @@ function FirstResume() {
       case 'exp':
         setToggleExpRow(false)
         break;
+      case 'skill':
+        setSkillToggle(false)
+        break;
       default:
         return;
     }
@@ -123,9 +129,17 @@ function FirstResume() {
       case 'exp':
         setToggleExpRow(true)
         break;
+      case 'skill':
+        setSkillToggle(true)
+        break;
       default:
         return;
     }
+  }
+
+  const handleSkills = (values) => {
+    setSkillInp(values)
+    setSkill(values.split(',').map(item => item.trim()).filter(item => item.length > 0))
   }
 
   const addNewRow = (region) => {
@@ -166,43 +180,48 @@ function FirstResume() {
               </div>
             </div>
             <div className="item2_container">
-              <div className="item2_container_1">
-                <TextField
-                  hiddenLabel
-                  placeholder="Program Name"
-                  variant='filled'
-                  size='medium'
-                  margin="normal"
-                  fullWidth
-                  sx={{
-                    '& .MuiFilledInput-underline': {
-                      fontSize: '1rem',
-                      fontWeight: 'semi-bold',
-                    }
-                  }}
-                  onClick={handleClick}
-                />
-                <TextField
-                  hiddenLabel
-                  placeholder="School / Institute name"
-                  variant='filled'
-                  size='medium'
-                  margin="normal"
-                  fullWidth
-                  sx={{
-                    '& .MuiFilledInput-underline': {
-                      fontSize: '1rem',
-                      fontWeight: 'semi-bold',
-                    }
-                  }}
-                  onClick={handleClick}
-                />
+              <div className="item2_container_1" onBlur={(e) => handleBlur(e, 'skill')} onClick={() => handleClick('skill')}>
+                <div className="item2_container_1_skill">
+                  Skills
+                </div>
+                <div tabIndex={'1'} className="item2_container_1_skillCont" >
+                  {skill?.length > 0 && skill.map(item => <span style={{margin: '0.5vw 0.2vw', display: 'inline-block'}}><Chip label={item} color='info' /></span>)}
+                  <div style={{ minHeight: '40px' }}>
+                    {skillToggle &&
+                      <TextField
+                        hiddenLabel
+                        placeholder='Enter skills here'
+                        variant='filled'
+                        value={skillInp}
+                        size='medium'
+                        margin="normal"
+                        fullWidth
+                        multiline
+                        sx={{
+                          '& .MuiFilledInput-underline': {
+                            fontSize: '1rem',
+                            fontWeight: 'semi-bold',
+                          }
+                        }}
+                        onChange={(e) => handleSkills(e.target.value)}
+                      />}
+                  </div>
+                </div>
               </div>
               <div className="item2_container_2">
-                <span className='fromDate'>
-                  <label>From:</label>
-                  <input type="date" />
-                </span>
+                
+              </div>
+              <div className="item2_container_3">
+
+              </div>
+              <div className="item2_container_4">
+
+              </div>
+              <div className="item2_container_5">
+
+              </div>
+              <div className="item2_container_6">
+
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@
     flex-grow: 1;
     flex-direction: column;
     margin: 25px 25px 20px 0px;
+    max-width: 50%;
     &_1{
       // &_ed{
 
@@ -28,6 +29,7 @@
     flex-grow: 1;
     flex-direction: column;
     margin: 25px 0px 20px 25px;
+    // width: 40%;
   }
 }
 
