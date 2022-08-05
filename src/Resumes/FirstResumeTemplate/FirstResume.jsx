@@ -17,6 +17,9 @@ function FirstResume() {
   const [skill, setSkill] = useState([])
   const [skillInp, setSkillInp] = useState('')
   const [skillToggle, setSkillToggle] = useState(true)
+  const [awardsInp, setAwardsInp] = useState('')
+  const [awardsToggle, setAwardsToggle] = useState(true)
+  const [awards, setAwards] = useState([])
 
   const headerContent = () => {
     return (
@@ -115,6 +118,9 @@ function FirstResume() {
       case 'skill':
         setSkillToggle(false)
         break;
+      case 'award':
+        setAwardsToggle(false)
+        break;
       default:
         return;
     }
@@ -132,14 +138,28 @@ function FirstResume() {
       case 'skill':
         setSkillToggle(true)
         break;
+      case 'award':
+        setAwardsToggle(true)
+        break;
       default:
         return;
     }
   }
 
-  const handleSkills = (values) => {
-    setSkillInp(values)
-    setSkill(values.split(',').map(item => item.trim()).filter(item => item.length > 0))
+  const handleInput = (reg, values) => {
+    console.log(values)
+    switch (reg) {
+      case 'skill':
+        setSkillInp(values)
+        setSkill(values.split(',').map(item => item.trim()).filter(item => item.length > 0))
+        break;
+      case 'awards':
+        setAwardsInp(values)
+        setAwards(values.split(';').filter(item => item.length > 0))
+        break;
+      default:
+        return
+    }
   }
 
   const addNewRow = (region) => {
@@ -180,11 +200,11 @@ function FirstResume() {
               </div>
             </div>
             <div className="item2_container">
-              <div className="item2_container_1" onBlur={(e) => handleBlur(e, 'skill')} onClick={() => handleClick('skill')}>
-                <div className="item2_container_1_skill">
+              <div tabIndex={'1'} className="item2_container_1" onBlur={(e) => handleBlur(e, 'skill')} onClick={() => handleClick('skill')}>
+                <div className="item2_container_1_header">
                   Skills
                 </div>
-                <div tabIndex={'1'} className="item2_container_1_skillCont" >
+                <div className="item2_container_1_skillCont" >
                   {skill?.length > 0 && skill.map(item => <span style={{margin: '0.5vw 0.2vw', display: 'inline-block'}}><Chip label={item} color='info' /></span>)}
                   <div style={{ minHeight: '40px' }}>
                     {skillToggle &&
@@ -203,13 +223,43 @@ function FirstResume() {
                             fontWeight: 'semi-bold',
                           }
                         }}
-                        onChange={(e) => handleSkills(e.target.value)}
+                        onChange={(e) => handleInput('skill', e.target.value)}
                       />}
                   </div>
                 </div>
               </div>
-              <div className="item2_container_2">
-                
+              <div tabIndex={'2'} className="item2_container_2" onBlur={(e) => handleBlur(e, 'award')} onClick={() => handleClick('award')}>
+                <div className="item2_container_2_header">
+                  HONOURS AND AWARDS
+                </div>
+                <div className="item2_container_2_body">
+                  {awards?.length > 0 &&
+                    <ol>
+                      {
+                        awards.map(item => <li>{item}</li>)
+                      }
+                    </ol>
+                  }
+                  <div style={{ minHeight: '40px' }}>
+                    {awardsToggle && <TextField
+                      hiddenLabel
+                      placeholder='Enter honors and awards here each separated by semicolon (;)'
+                      variant='filled'
+                      value={awardsInp}
+                      size='medium'
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      sx={{
+                        '& .MuiFilledInput-underline': {
+                          fontSize: '1rem',
+                          fontWeight: 'semi-bold',
+                        }
+                      }}
+                      onChange={(e) => handleInput('awards', e.target.value)}
+                      />}
+                  </div>
+                </div>
               </div>
               <div className="item2_container_3">
 
