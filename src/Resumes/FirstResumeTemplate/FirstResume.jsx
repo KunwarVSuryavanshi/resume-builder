@@ -28,7 +28,7 @@ function FirstResume() {
   const headerContent = () => {
     return (
       <> 
-        <Grid container >
+        <Grid container className='top_header'>
               <Grid xs={8}>
                 <TextField
                   hiddenLabel
@@ -61,11 +61,12 @@ function FirstResume() {
                     sx={{
                       minWidth: email.length > 22 ? `${email.length + 2}ch` : '22ch',
                       input: {
-                        textAlign: 'end'
+                        textAlign: 'end',
+                        fontWeight: 600
                       }
                     }}
                   />
-                  <Mail style={{ paddingTop: '1.2vh'}} />
+                  <Mail/>
                 </span>
                 <span className='flex_default' style={{float: 'right'}}>
                   <TextField
@@ -77,15 +78,16 @@ function FirstResume() {
                     margin="normal"
                     sx={{
                       input: {
-                        textAlign: 'end'
+                        textAlign: 'end',
+                        fontWeight: 600
                       }
                     }}
                   />
-                  <Phone style={{paddingTop: '1vh'}} />
+                  <Phone />
                 </span>
               </Grid>
         </Grid >
-        <Grid container xs={12}>
+        <Grid container xs={12} style={{marginTop: '20px'}}>
           <TextField
             hiddenLabel
             id="summary"
@@ -97,10 +99,14 @@ function FirstResume() {
             multiline
             sx={{
               '& .MuiFilledInput-underline': {
-                fontSize: '1rem',
-                fontWeight: 'semi-bold',
+                fontSize: '1.15rem',
+                fontWeight: '500',
+                fontStyle: 'italic',
+                textArea: {
+                  textAlign: 'center'
+                }
                 // width: 'vw',
-              }
+              },
             }}
           />
         </Grid>
@@ -110,6 +116,7 @@ function FirstResume() {
 
   const handleBlur = (e, region) => {
     e.preventDefault()
+    console.log("BLUR TRIGGERED")
     if(e.currentTarget.contains(e.relatedTarget)) return
     // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
     switch (region) {
@@ -125,6 +132,9 @@ function FirstResume() {
       case 'award':
         setAwardsToggle(false)
         break;
+      case 'proj':
+        setProjToggle(false)
+        break;
       default:
         return;
     }
@@ -132,6 +142,7 @@ function FirstResume() {
 
   const handleClick = (region) => {
     // e.preventDefault()
+    console.log("Click triggered")
     switch (region) {
       case 'edu':
         setToggleEduRow(true)
@@ -144,6 +155,9 @@ function FirstResume() {
         break;
       case 'award':
         setAwardsToggle(true)
+        break;
+      case 'proj':
+        setProjToggle(true)
         break;
       default:
         return;
@@ -241,11 +255,11 @@ function FirstResume() {
                 </div>
                 <div className="item2_container_2_body">
                   {awards?.length > 0 &&
-                    <ol>
+                    <ul>
                       {
                         awards.map(item => <li>{item}</li>)
                       }
-                    </ol>
+                    </ul>
                   }
                   <div style={{ minHeight: '40px' }}>
                     {awardsToggle && <TextField
@@ -274,11 +288,11 @@ function FirstResume() {
                 </div>
                 <div className="item2_container_3_body">
                   {personalProj?.length > 0 &&
-                    <ol>
+                    <ul>
                       {
                         personalProj.map(item => <li>{item}</li>)
                       }
-                    </ol>
+                    </ul>
                   }
                   <div style={{ minHeight: '40px' }}>
                     {projToggle && <TextField

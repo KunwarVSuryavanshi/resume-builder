@@ -4,7 +4,7 @@ import FirstResume from './Resumes/FirstResumeTemplate/FirstResume';
 
 function App() {
   return (
-    <div>
+    <div id="App">
       <FirstResume/>
     </div>
   );
