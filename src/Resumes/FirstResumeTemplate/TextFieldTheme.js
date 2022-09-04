@@ -13,6 +13,7 @@ export const theme = createTheme({
               borderBottom: '0px'
             },
             fontFamily: 'Ubuntu',
+            // fontWeight: '600',
             input: {
               padding: '3px'
             }

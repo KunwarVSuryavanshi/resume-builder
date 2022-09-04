@@ -14,13 +14,13 @@ function EducationDetails() {
         hiddenLabel
         placeholder="Program Name"
         variant='filled'
-        size='medium'
+        size='small'
         margin="normal"
         fullWidth
         sx={{
           '& .MuiFilledInput-underline': {
-            fontSize: '1rem',
-            fontWeight: 'semi-bold',
+            fontWeight: 500,
+            fontSize: '1.4rem'
           }
         }
         }
@@ -36,18 +36,19 @@ function EducationDetails() {
         fullWidth
         sx={{
           '& .MuiFilledInput-underline': {
-            fontSize: '1rem',
-            fontWeight: 'semi-bold',
-          }
+            fontSize: '1.25rem',
+            fontWeight: '400',
+          },
+          marginTop: '-10px !important'
         }}
       />
       <span className='fromDate'>
         <label>From:</label>
-        <input type="date" onBlur={handleBlur}/>
+        <input type="date" onBlur={handleBlur} pattern="\d{1,2}/\d{1,2}/\d{4}" />
       </span>
       <span className='toDate'>
         <label>To:</label>
-        <input type="date" />
+        <input type="date" pattern="\d{1, 2}/\d{1, 2}/\d{4}"/>
       </span>
     </div>
   )
