@@ -115,7 +115,7 @@ function FirstResume() {
   }
 
   const handleBlur = (e, region) => {
-    e.preventDefault()
+    // e.preventDefault()
     console.log("BLUR TRIGGERED")
     if(e.currentTarget.contains(e.relatedTarget)) return
     // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
@@ -213,7 +213,7 @@ function FirstResume() {
                 </div>
               </div>
               <div className="item1_container_2">
-                <div className="item1_container_1_ed">WORK EXPERIENCE</div>
+                <div className="item1_container_1_ed workExp">WORK EXPERIENCE</div>
                 <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('exp')} onBlur={(e) => handleBlur(e, 'exp')}>
                   {workExp.map(item => item)}
                   {toggleExpRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('exp')} />}

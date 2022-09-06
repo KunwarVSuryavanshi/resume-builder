@@ -24,7 +24,7 @@
         font-size: 1.6em;
         border-bottom: 2px solid rgb(59, 58, 58);
         padding-bottom: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
       &_details{
         min-height: 20vh;
@@ -34,7 +34,7 @@
       }
     }
     &_2{
-      padding-top: 5px;
+      padding-top: 15px;
     }
   }
   .item2_container {
@@ -61,7 +61,7 @@
 }
 
 .educationDetails{
-  padding-bottom: 2vh;
+  padding-bottom: 1vh;
   .fromDate{
     padding-left: 4px;
     margin-left: 4px;
@@ -88,8 +88,15 @@
       
   }
   .toDate{
-    padding-left: 2vw;
     font-style: italic;
+    .MuiFormControl-root {
+      .MuiFilledInput-root{
+        input{
+          min-width: 120px;
+          max-width: max-content;
+        }
+      }
+    }
     label{
       padding-right: 0.5vw;
       font-size: 1.05rem;
@@ -123,4 +130,16 @@
 .MuiFormControl-root{
   margin-top: 0px !important;
   margin-bottom: 0px !important;
+}
+.dash{
+  padding-bottom: 10px;
+}
+.date_container {
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  align-items: center;
+  .fromDate{
+    padding-left: 0px;
+  }
 }

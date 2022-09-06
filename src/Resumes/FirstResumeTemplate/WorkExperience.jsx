@@ -1,12 +1,13 @@
 import { Checkbox, TextField } from '@mui/material'
 import React, { useState } from 'react'
-import { useEffect } from 'react'
 
-function WorkExperience(props) {
+function WorkExperience() {
 
   const [present, setPresent] = useState(false)
   const [togglePresent, setTogglePresent] = useState(false)
-  
+  const [from, setFrom] = useState('')
+  const [to, setTo] = useState('')
+
   const handleBlur = (e) => {
     /*
       e.target ===> origin of event
@@ -42,8 +43,8 @@ function WorkExperience(props) {
         fullWidth
         sx={{
           '& .MuiFilledInput-underline': {
-            fontSize: '1rem',
-            fontWeight: 'semi-bold',
+            fontWeight: 500,
+            fontSize: '1.4rem'
           }
         }
         }
@@ -59,36 +60,74 @@ function WorkExperience(props) {
         fullWidth
         sx={{
           '& .MuiFilledInput-underline': {
-            fontSize: '1rem',
-            fontWeight: 'semi-bold',
-          }
+            fontSize: '1.25rem',
+            fontWeight: '400'
+          },
+          marginTop: '-10px !important'
         }}
       />
-      <span className='fromDate'>
-        <label>From:</label>
-        <input type="date" />
-      </span>
-      <span className='toDate'>
-        {!present ?
-          <>
-            <label>To:</label>
-            <input type="date" />
-          </>
-          :
-          <label>Present</label>
-        }
-        {!togglePresent &&
-          <>
-            <Checkbox
-              checked={present}
-              onChange={() => setPresent(!present)}
-              onBlur={handleBlur}
+      <div className="date_container">
+        <span className='fromDate'>
+          <TextField
+            hiddenLabel
+            placeholder="From"
+            variant='filled'
+            margin="normal"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            sx={{
+              '& .MuiFilledInput-underline': {
+                fontSize: '1rem',
+                fontWeight: '400'
+              },
+              '& .MuiFilledInput-root': {
+                padding: '0px'
+              },
+              marginTop: '-10px !important',
+              maxWidth: from?.length > 12 ? `${from.length}ch` : '12ch'
+            }}
+          />
+        </span>
+        <span className='dash'>-</span>
+        <span className='toDate'>
+          {!present ?
+            <TextField
+              hiddenLabel
+              placeholder="To"
+              variant='filled'
+              size='small'
+              margin="normal"
+              onChange={(e) => setTo(e.target.value)}
+              sx={{
+                '& .MuiFilledInput-underline': {
+                  fontSize: '1rem',
+                  fontWeight: '400'
+                },
+                marginTop: '-10px !important',
+                maxWidth: to?.length > 12 ? `${to.length +2}ch` : '14ch'
+              }}
             />
-            <label>Present</label>
-          </>
-        }
+            :
+            <label style={{ paddingBottom: '10px', marginTop: '-10px !important'}}>Present</label>
+          }
+          {/* {!togglePresent && to?.length < 1 &&
+            <>
+              <Checkbox
+                checked={present}
+                onChange={() => setPresent(!present)}
+                onBlur={handleBlur}
+                sx={{
+                  paddingTop: '0 !important',
+                  
+                }}
+                size="small"
+              />
+              <label>Present</label>
+            </>
+          } */}
 
-      </span>
+        </span>
+      </div>
     </div>
   )
 }
