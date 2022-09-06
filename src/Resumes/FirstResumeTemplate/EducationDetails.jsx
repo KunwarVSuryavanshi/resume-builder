@@ -56,7 +56,7 @@ function EducationDetails() {
         <span className='fromDate'>
           <TextField
             hiddenLabel
-            placeholder="From"
+            placeholder="Starting from"
             variant='filled'
             margin="normal"
             value={from}
@@ -78,7 +78,7 @@ function EducationDetails() {
         <span className='toDate'>
           <TextField
             hiddenLabel
-            placeholder="To"
+            placeholder="Till"
             variant='filled'
             size='small'
             margin="normal"

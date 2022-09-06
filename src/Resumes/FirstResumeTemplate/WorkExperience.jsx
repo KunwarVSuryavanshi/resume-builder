@@ -70,7 +70,7 @@ function WorkExperience() {
         <span className='fromDate'>
           <TextField
             hiddenLabel
-            placeholder="From"
+            placeholder="Starting from"
             variant='filled'
             margin="normal"
             value={from}
@@ -93,7 +93,7 @@ function WorkExperience() {
           {!present ?
             <TextField
               hiddenLabel
-              placeholder="To"
+              placeholder="Till"
               variant='filled'
               size='small'
               margin="normal"

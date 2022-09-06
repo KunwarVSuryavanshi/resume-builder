@@ -20,6 +20,20 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: { // ===> '& .MuiChip-root'
+          // '& .MuiChip-filled': {
+            display: 'flex !important',
+            alignItems: 'center !important',
+            justifyContent: 'center !important',
+            padding: '0 5px !important',
+            fontFamily: 'Ubuntu',
+            fontSize: '1rem'
+          // }
+        }
+      }
     }
   }
 })

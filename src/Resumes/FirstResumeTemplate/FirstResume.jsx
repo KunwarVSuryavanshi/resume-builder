@@ -227,11 +227,11 @@ function FirstResume() {
                 </div>
                 <div className="item2_container_1_skillCont" >
                   {skill?.length > 0 && skill.map(item => <span style={{margin: '0.5vw 0.2vw', display: 'inline-block'}}><Chip label={item} color='info' /></span>)}
-                  <div style={{ minHeight: '40px' }}>
+                  <div>
                     {skillToggle &&
                       <TextField
                         hiddenLabel
-                        placeholder='Enter skills here'
+                        placeholder={`Enter skills here, each skill separated by comma (",")`}
                         variant='filled'
                         value={skillInp}
                         size='medium'
@@ -261,10 +261,10 @@ function FirstResume() {
                       }
                     </ul>
                   }
-                  <div style={{ minHeight: '40px' }}>
+                  <div>
                     {awardsToggle && <TextField
                       hiddenLabel
-                      placeholder='Enter honors and awards here each separated by semicolon (;)'
+                      placeholder='Enter honors and awards here each separated by semicolon (";")'
                       variant='filled'
                       value={awardsInp}
                       size='medium'
@@ -294,10 +294,10 @@ function FirstResume() {
                       }
                     </ul>
                   }
-                  <div style={{ minHeight: '40px' }}>
+                  <div>
                     {projToggle && <TextField
                       hiddenLabel
-                      placeholder='Enter personal projects here each separated by semicolon (;)'
+                      placeholder='Enter personal projects here each separated by semicolon (";")'
                       variant='filled'
                       value={projInp}
                       size='medium'
