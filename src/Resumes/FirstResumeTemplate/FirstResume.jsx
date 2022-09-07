@@ -7,7 +7,7 @@ import './style.scss'
 import EducationDetails from './EducationDetails'
 import WorkExperience from './WorkExperience'
 
-function FirstResume() {
+function FirstResume(props) {
   
   const [email, setEmail] = useState('')
   const [toggleEduRow, setToggleEduRow] = useState(false)
@@ -199,41 +199,75 @@ function FirstResume() {
   return (
     <ThemeProvider theme={TextFieldTheme}>
       <div className='body'>
-        <Container className="container" style={{margin: 'auto'}}>
-          <Grid container>
-            {headerContent()}
-          </Grid>
-          <div className='flex-container'>
-            <div className="item1_container">
-              <div className="item1_container_1">
-                <div className="item1_container_1_ed">EDUCATION</div>
-                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('edu')} onBlur={(e) => handleBlur(e, 'edu')}>
-                  {details.map(item => item)}
-                  {toggleEduRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('edu') } />}
+        <Container className="container" style={{ margin: 'auto' }}>
+          <div ref={props.printRef}>
+            <Grid container>
+              {headerContent()}
+            </Grid>
+            <div className='flex-container'>
+              <div className="item1_container">
+                <div className="item1_container_1">
+                  <div className="item1_container_1_ed">EDUCATION</div>
+                  <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('edu')} onBlur={(e) => handleBlur(e, 'edu')}>
+                    {details.map(item => item)}
+                    {toggleEduRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('edu')} />}
+                  </div>
+                </div>
+                <div className="item1_container_2">
+                  <div className="item1_container_1_ed workExp">WORK EXPERIENCE</div>
+                  <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('exp')} onBlur={(e) => handleBlur(e, 'exp')}>
+                    {workExp.map(item => item)}
+                    {toggleExpRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('exp')} />}
+                  </div>
                 </div>
               </div>
-              <div className="item1_container_2">
-                <div className="item1_container_1_ed workExp">WORK EXPERIENCE</div>
-                <div tabIndex={1} id='detailsDiv' className="item1_container_1_details" onClick={() => handleClick('exp')} onBlur={(e) => handleBlur(e, 'exp')}>
-                  {workExp.map(item => item)}
-                  {toggleExpRow && <PlaylistAdd className='addbtn' onClick={() => addNewRow('exp')} />}
+              <div className="item2_container">
+                <div tabIndex={'1'} className="item2_container_1" onBlur={(e) => handleBlur(e, 'skill')} onClick={() => handleClick('skill')}>
+                  <div className="item2_container_1_header">
+                    SKILLS
+                  </div>
+                  <div className="item2_container_1_skillCont" >
+                    {skill?.length > 0 && skill.map(item => <span style={{ margin: '0.5vw 0.2vw', display: 'inline-block' }}><Chip label={item} color='info' /></span>)}
+                    <div>
+                      {skillToggle &&
+                        <TextField
+                          hiddenLabel
+                          placeholder={`Enter skills here, each skill separated by comma (",")`}
+                          variant='filled'
+                          value={skillInp}
+                          size='medium'
+                          margin="normal"
+                          fullWidth
+                          multiline
+                          sx={{
+                            '& .MuiFilledInput-underline': {
+                              fontSize: '1rem',
+                              fontWeight: 'semi-bold',
+                            }
+                          }}
+                          onChange={(e) => handleInput('skill', e.target.value)}
+                        />}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="item2_container">
-              <div tabIndex={'1'} className="item2_container_1" onBlur={(e) => handleBlur(e, 'skill')} onClick={() => handleClick('skill')}>
-                <div className="item2_container_1_header">
-                  SKILLS
-                </div>
-                <div className="item2_container_1_skillCont" >
-                  {skill?.length > 0 && skill.map(item => <span style={{margin: '0.5vw 0.2vw', display: 'inline-block'}}><Chip label={item} color='info' /></span>)}
-                  <div>
-                    {skillToggle &&
-                      <TextField
+                <div tabIndex={'2'} className="item2_container_2" onBlur={(e) => handleBlur(e, 'award')} onClick={() => handleClick('award')}>
+                  <div className="item2_container_2_header">
+                    HONOURS AND AWARDS
+                  </div>
+                  <div className="item2_container_2_body">
+                    {awards?.length > 0 &&
+                      <ul>
+                        {
+                          awards.map(item => <li>{item}</li>)
+                        }
+                      </ul>
+                    }
+                    <div>
+                      {awardsToggle && <TextField
                         hiddenLabel
-                        placeholder={`Enter skills here, each skill separated by comma (",")`}
+                        placeholder='Enter honors and awards here each separated by semicolon (";")'
                         variant='filled'
-                        value={skillInp}
+                        value={awardsInp}
                         size='medium'
                         margin="normal"
                         fullWidth
@@ -244,83 +278,51 @@ function FirstResume() {
                             fontWeight: 'semi-bold',
                           }
                         }}
-                        onChange={(e) => handleInput('skill', e.target.value)}
+                        onChange={(e) => handleInput('awards', e.target.value)}
                       />}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div tabIndex={'2'} className="item2_container_2" onBlur={(e) => handleBlur(e, 'award')} onClick={() => handleClick('award')}>
-                <div className="item2_container_2_header">
-                  HONOURS AND AWARDS
-                </div>
-                <div className="item2_container_2_body">
-                  {awards?.length > 0 &&
-                    <ul>
-                      {
-                        awards.map(item => <li>{item}</li>)
-                      }
-                    </ul>
-                  }
-                  <div>
-                    {awardsToggle && <TextField
-                      hiddenLabel
-                      placeholder='Enter honors and awards here each separated by semicolon (";")'
-                      variant='filled'
-                      value={awardsInp}
-                      size='medium'
-                      margin="normal"
-                      fullWidth
-                      multiline
-                      sx={{
-                        '& .MuiFilledInput-underline': {
-                          fontSize: '1rem',
-                          fontWeight: 'semi-bold',
+                <div tabIndex={'3'} lang='en' className="item2_container_3" onBlur={(e) => handleBlur(e, 'proj')} onClick={() => handleClick('proj')}>
+                  <div className="item2_container_3_header">
+                    PERSONAL PROJECTS
+                  </div>
+                  <div className="item2_container_3_body">
+                    {personalProj?.length > 0 &&
+                      <ul>
+                        {
+                          personalProj.map(item => <li>{item}</li>)
                         }
-                      }}
-                      onChange={(e) => handleInput('awards', e.target.value)}
+                      </ul>
+                    }
+                    <div>
+                      {projToggle && <TextField
+                        hiddenLabel
+                        placeholder='Enter personal projects here each separated by semicolon (";")'
+                        variant='filled'
+                        value={projInp}
+                        size='medium'
+                        margin="normal"
+                        fullWidth
+                        multiline
+                        sx={{
+                          '& .MuiFilledInput-underline': {
+                            fontSize: '1rem',
+                            fontWeight: 'semi-bold',
+                          }
+                        }}
+                        onChange={(e) => handleInput('proj', e.target.value)}
                       />}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div tabIndex={'3'} lang='en' className="item2_container_3" onBlur={(e) => handleBlur(e, 'proj')} onClick={() => handleClick('proj')}>
-                <div className="item2_container_3_header">
-                  PERSONAL PROJECTS
-                </div>
-                <div className="item2_container_3_body">
-                  {personalProj?.length > 0 &&
-                    <ul>
-                      {
-                        personalProj.map(item => <li>{item}</li>)
-                      }
-                    </ul>
-                  }
-                  <div>
-                    {projToggle && <TextField
-                      hiddenLabel
-                      placeholder='Enter personal projects here each separated by semicolon (";")'
-                      variant='filled'
-                      value={projInp}
-                      size='medium'
-                      margin="normal"
-                      fullWidth
-                      multiline
-                      sx={{
-                        '& .MuiFilledInput-underline': {
-                          fontSize: '1rem',
-                          fontWeight: 'semi-bold',
-                        }
-                      }}
-                      onChange={(e) => handleInput('proj', e.target.value)}
-                    />}
-                  </div>
-                </div>
-              </div>
-              {/* <div className="item2_container_4">
+                {/* <div className="item2_container_4">
 
               </div>
               <div className="item2_container_5">
 
               </div> */}
+              </div>
             </div>
           </div>
         </Container>

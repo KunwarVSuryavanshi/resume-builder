@@ -1,11 +1,12 @@
 import './App.css';
-import FirstResume from './Resumes/FirstResumeTemplate/FirstResume';
+// import FirstResume from './Resumes/FirstResumeTemplate/FirstResume';
+import ResumeWrapper from './ResumeWrapper';
 
 
 function App() {
   return (
     <div id="App">
-      <FirstResume/>
+      <ResumeWrapper/>
     </div>
   );
 }
