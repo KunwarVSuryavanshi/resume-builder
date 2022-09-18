@@ -1,19 +1,21 @@
 import { PlaylistAdd } from '@mui/icons-material'
 import { Chip, Grid, TextField, ThemeProvider } from '@mui/material'
 import { Container } from '@mui/system'
-import React, { useState } from 'react'
-import {theme as TextFieldTheme} from './TextFieldTheme'
+import React, { useEffect, useState } from 'react'
+import { theme as TextFieldTheme } from './TextFieldTheme'
 import './style.scss'
 import EducationDetails from './EducationDetails'
 import WorkExperience from './WorkExperience'
 import mail from '../../assets/mail_black_24dp.svg'
 import phone from '../../assets/phone_black_24dp.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import addDetails from '../../Redux/Actions/AddHeader.action'
 
 function FirstResume(props) {
-  
+
   const [email, setEmail] = useState('')
   const [toggleEduRow, setToggleEduRow] = useState(false)
-  const [details, setDetails] = useState([<EducationDetails/>])
+  const [details, setDetails] = useState([<EducationDetails />])
   const [toggleExpRow, setToggleExpRow] = useState(false)
   const [workExp, setWorkExp] = useState([<WorkExperience />])
   const [skill, setSkill] = useState([])
@@ -26,70 +28,75 @@ function FirstResume(props) {
   const [projToggle, setProjToggle] = useState(true)
   const [projInp, setProjInp] = useState('')
 
+  const dispatch = useDispatch();
+  const headerData = useSelector(state => state.header) // Single reducer so direct header...otherwise reducer.state
 
   const headerContent = () => {
     return (
-      <> 
+      <>
         <Grid container className='top_header'>
-              <Grid xs={8}>
-                <TextField
-                  hiddenLabel
-                  id="userName"
-                  placeholder="Enter your name here"
-                  variant='filled'
-                  size='medium'
-                  margin="normal"
-                  multiline={true}
-                  sx={{
-                    '& .MuiFilledInput-underline': {
-                      fontSize: '2.5rem',
-                      fontWeight: 'bold',
-                      width: '32vw',
-                    }
-                  }}
-                />
-              </Grid>
-              <Grid xs={4}>
-                <span className='flex_default' style={{float: 'right'}}>
-                  <TextField
-                    hiddenLabel
-                    id="userEmail"
-                    placeholder="Email address"
-                    variant='filled'
-                    size='medium'
-                    margin="normal"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    sx={{
-                      minWidth: email.length > 22 ? `${email.length + 2}ch` : '22ch',
-                      input: {
-                        textAlign: 'end',
-                        fontWeight: 600
-                      }
-                    }}
-                  />
-                  <img src={ mail} alt=""/>
-                </span>
-                <span className='flex_default' style={{float: 'right'}}>
-                  <TextField
-                    hiddenLabel
-                    id="phoneNumber"
-                    placeholder="Phone number"
-                    variant='filled'
-                    size='medium'
-                    margin="normal"
-                    sx={{
-                      input: {
-                        textAlign: 'end',
-                        fontWeight: 600
-                      }
-                    }}
-                  />
-                 <img src={ phone} alt=""/>
-                </span>
-              </Grid>
+          <Grid xs={8}>
+            <TextField
+              hiddenLabel
+              id="userName"
+              placeholder="Enter your name here"
+              variant='filled'
+              size='medium'
+              margin="normal"
+              multiline={true}
+              sx={{
+                '& .MuiFilledInput-underline': {
+                  fontSize: '2.5rem',
+                  fontWeight: 'bold',
+                  width: '32vw',
+                }
+              }}
+            />
+          </Grid>
+          <Grid xs={4}>
+            <span className='flex_default' style={{ float: 'right' }}>
+              <TextField
+                hiddenLabel
+                id="userEmail"
+                placeholder="Email address"
+                variant='filled'
+                size='medium'
+                margin="normal"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  dispatch(addDetails('BASIC', { email: e.target.value }));
+                }}
+                sx={{
+                  minWidth: email.length > 22 ? `${email.length + 2}ch` : '22ch',
+                  input: {
+                    textAlign: 'end',
+                    fontWeight: 600
+                  }
+                }}
+              />
+              <img src={mail} alt="" />
+            </span>
+            <span className='flex_default' style={{ float: 'right' }}>
+              <TextField
+                hiddenLabel
+                id="phoneNumber"
+                placeholder="Phone number"
+                variant='filled'
+                size='medium'
+                margin="normal"
+                sx={{
+                  input: {
+                    textAlign: 'end',
+                    fontWeight: 600
+                  }
+                }}
+              />
+              <img src={phone} alt="" />
+            </span>
+          </Grid>
         </Grid >
-        <Grid container xs={12} style={{marginTop: '20px'}}>
+        <Grid container xs={12} style={{ marginTop: '20px' }}>
           <TextField
             hiddenLabel
             id="summary"
@@ -119,7 +126,7 @@ function FirstResume(props) {
   const handleBlur = (e, region) => {
     // e.preventDefault()
     console.log("BLUR TRIGGERED")
-    if(e.currentTarget.contains(e.relatedTarget)) return
+    if (e.currentTarget.contains(e.relatedTarget)) return
     // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
     switch (region) {
       case 'edu':
@@ -187,7 +194,7 @@ function FirstResume(props) {
   }
 
   const addNewRow = (region) => {
-    switch (region){
+    switch (region) {
       case 'edu':
         setDetails([...details, <EducationDetails />])
         break;
@@ -198,6 +205,10 @@ function FirstResume(props) {
         return;
     }
   }
+
+  useEffect(() => {
+    console.log("Header---->", headerData);
+  }, [headerData])
 
   return (
     <ThemeProvider theme={TextFieldTheme}>
