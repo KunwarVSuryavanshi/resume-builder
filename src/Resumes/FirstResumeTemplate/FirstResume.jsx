@@ -1,4 +1,4 @@
-import { Mail, Phone, PlaylistAdd } from '@mui/icons-material'
+import { PlaylistAdd } from '@mui/icons-material'
 import { Chip, Grid, TextField, ThemeProvider } from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useState } from 'react'
@@ -6,13 +6,15 @@ import {theme as TextFieldTheme} from './TextFieldTheme'
 import './style.scss'
 import EducationDetails from './EducationDetails'
 import WorkExperience from './WorkExperience'
+import mail from '../../assets/mail_black_24dp.svg'
+import phone from '../../assets/phone_black_24dp.svg'
 
 function FirstResume(props) {
   
   const [email, setEmail] = useState('')
   const [toggleEduRow, setToggleEduRow] = useState(false)
   const [details, setDetails] = useState([<EducationDetails/>])
-  const[toggleExpRow, setToggleExpRow] = useState(false)
+  const [toggleExpRow, setToggleExpRow] = useState(false)
   const [workExp, setWorkExp] = useState([<WorkExperience />])
   const [skill, setSkill] = useState([])
   const [skillInp, setSkillInp] = useState('')
@@ -66,7 +68,7 @@ function FirstResume(props) {
                       }
                     }}
                   />
-                  <Mail/>
+                  <img src={ mail} alt=""/>
                 </span>
                 <span className='flex_default' style={{float: 'right'}}>
                   <TextField
@@ -83,7 +85,7 @@ function FirstResume(props) {
                       }
                     }}
                   />
-                  <Phone />
+                 <img src={ phone} alt=""/>
                 </span>
               </Grid>
         </Grid >
@@ -178,6 +180,7 @@ function FirstResume(props) {
       case 'proj':
         setProjInp(values)
         setPersonalProj(values.split(';').filter(item => item.length > 0))
+        break;
       default:
         return
     }
@@ -199,8 +202,8 @@ function FirstResume(props) {
   return (
     <ThemeProvider theme={TextFieldTheme}>
       <div className='body'>
-        <Container className="container" style={{ margin: 'auto' }}>
-          <div ref={props.printRef}>
+        <Container className="container" style={{ margin: 'auto', maxWidth: '8.5in', maxHeight: '11.23in' }} ref={props.printRef}>
+          <div>
             <Grid container>
               {headerContent()}
             </Grid>

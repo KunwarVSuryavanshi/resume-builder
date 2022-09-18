@@ -4,6 +4,7 @@ import ReactToPDF from '@kunwarji/react-to-pdf';
 import { Button } from '@mui/material';
 import React, { useRef } from 'react'
 import FirstResume from './Resumes/FirstResumeTemplate/FirstResume'
+import { useReactToPrint } from "react-to-print";
 
 const styles = {
   btn_container: {
@@ -16,19 +17,40 @@ const styles = {
 
 function ResumeWrapper() {
   const printRef = useRef();
+
+  const handleAfterPrint = () => {
+    console.log("`onAfterPrint` called"); 
+  }
+
+  const handleBeforePrint = () => {
+    console.log("`onBeforePrint` called"); 
+  }
+
+  const reactToPrintContent = () => {
+    return printRef.current;
+  }
+
+  const handlePrint = useReactToPrint({
+    content: reactToPrintContent,
+    documentTitle: "AwesomeFileName",
+    onBeforePrint: handleBeforePrint,
+    onAfterPrint: handleAfterPrint,
+    removeAfterPrint: true
+  });
+
   return (
     <>
       <div>
         <FirstResume printRef={printRef} />
       </div>
       <div style={styles.btn_container}>
-        <ReactToPDF element={printRef} scale={0.5} fileName='Resume'>
-          {(toPdf) => (
-            <Button variant='contained' onClick={toPdf}>
+        {/* <ReactToPDF element={printRef} scale={0.5}>
+          {(toPdf) => ( */}
+            <Button variant='contained' onClick={handlePrint}>
               Print Resume to pdf
             </Button>
-          )}
-        </ReactToPDF>
+          {/* )}
+        </ReactToPDF> */}
       </div>
     </>
   )
