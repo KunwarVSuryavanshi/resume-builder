@@ -345,4 +345,4 @@ function FirstResume(props) {
   )
 }
 
-export default FirstResume
+export default FirstResume;

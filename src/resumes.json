@@ -1,0 +1,25 @@
+[
+  {
+    "id": 0,
+    "index": 0,
+    "name": "KVS-1",
+    "path": "/FirstResumeTemplate/FirstResume",
+    "component": "FirstResume",
+    "staticData": ""
+  },
+  {
+    "id": 1,
+    "index": 1,
+    "name": "2nd Resume Name",
+    "path": "/SecondResumeTemplate/TestResume",
+    "component": "TestResume",
+    "staticData": ""
+  },
+  {
+    "id": 3,
+    "index": 3,
+    "name": "3nd Resume Name",
+    "path": "/ThirdResume/TestResume3",
+    "staticData": ""
+  }
+]
