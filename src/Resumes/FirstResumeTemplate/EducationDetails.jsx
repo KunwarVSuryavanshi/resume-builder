@@ -6,10 +6,6 @@ function EducationDetails() {
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
 
-  const handleBlur = () => {
-    console.log("HANDLE BLUR")
-  }
-
   return (
     <div className='educationDetails'>
       < TextField

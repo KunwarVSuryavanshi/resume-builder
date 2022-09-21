@@ -125,7 +125,6 @@ function FirstResume(props) {
 
   const handleBlur = (e, region) => {
     // e.preventDefault()
-    console.log("BLUR TRIGGERED")
     if (e.currentTarget.contains(e.relatedTarget)) return
     // console.log("On blur called", e.currentTarget, e.target, e.relatedTarget)
     switch (region) {
@@ -174,7 +173,6 @@ function FirstResume(props) {
   }
 
   const handleInput = (reg, values) => {
-    console.log(values)
     switch (reg) {
       case 'skill':
         setSkillInp(values)
@@ -205,10 +203,6 @@ function FirstResume(props) {
         return;
     }
   }
-
-  useEffect(() => {
-    console.log("Header---->", headerData);
-  }, [headerData])
 
   return (
     <ThemeProvider theme={TextFieldTheme}>

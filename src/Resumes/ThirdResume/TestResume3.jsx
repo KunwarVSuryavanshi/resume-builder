@@ -2,7 +2,9 @@ import React from 'react'
 
 function TestResume3() {
   return (
-    <div>TestResume3</div>
+    <div style={{ margin: '60px 0', minWidth: '8.5in', minHeight: '9in', textAlign: 'center' }}>
+      Third template goes here.....
+    </div>
   )
 }
 

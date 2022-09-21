@@ -24,14 +24,6 @@ function WorkExperience() {
     setTogglePresent(false)
   }
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("Calling method2", togglePresent)
-  //     setTogglePresent(true)
-  //   }
-  // }, [])
-
-
   return (
     <div className='educationDetails' onClick={handleClick} onBlur={handleBlur}>
       < TextField

@@ -1,0 +1,30 @@
+#App {
+  font-family: 'Ubuntu';
+}
+.app {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+}
+.btn, .btn_bfr {
+  min-width: 200px;
+  svg{
+    transform: scale(1);
+    transition: transform 0.65s;
+  }
+}
+.btn_bfr {
+  svg{
+    float: right;
+  }
+}
+.btn:hover, .btn_bfr:hover {
+  svg{
+    transform: scale(1.5);
+    transition: transform 0.65s;
+  }
+}
+.hide{
+  visibility: hidden;
+}

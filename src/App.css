@@ -1,9 +1,0 @@
-#App {
-  font-family: 'Ubuntu';
-}
-.app {
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   justify-content: space-around;
-}
