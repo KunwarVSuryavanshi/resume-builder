@@ -12,24 +12,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import addDetails from '../../Redux/Actions/AddHeader.action'
 
 function FirstResume(props) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [summary, setSummary] = useState('');
+  const [skillInp, setSkillInp] = useState('');
+  const [skill, setSkill] = useState([]);
+  const [awardsInp, setAwardsInp] = useState('');
+  const [awards, setAwards] = useState([]);
+  const [projInp, setProjInp] = useState('');
+  const [personalProj, setPersonalProj] = useState([]);
 
-  const [email, setEmail] = useState('')
   const [toggleEduRow, setToggleEduRow] = useState(false)
   const [details, setDetails] = useState([<EducationDetails />])
   const [toggleExpRow, setToggleExpRow] = useState(false)
   const [workExp, setWorkExp] = useState([<WorkExperience />])
-  const [skill, setSkill] = useState([])
-  const [skillInp, setSkillInp] = useState('')
   const [skillToggle, setSkillToggle] = useState(true)
-  const [awardsInp, setAwardsInp] = useState('')
   const [awardsToggle, setAwardsToggle] = useState(true)
-  const [awards, setAwards] = useState([])
-  const [personalProj, setPersonalProj] = useState([])
   const [projToggle, setProjToggle] = useState(true)
-  const [projInp, setProjInp] = useState('')
 
   const dispatch = useDispatch();
-  const headerData = useSelector(state => state.header) // Single reducer so direct header...otherwise reducer.state
+  const headerData = useSelector(state => state) // Single reducer so direct header...otherwise reducer.state
 
   const headerContent = () => {
     return (
@@ -43,6 +46,7 @@ function FirstResume(props) {
               variant='filled'
               size='medium'
               margin="normal"
+              value={name}
               multiline={true}
               sx={{
                 '& .MuiFilledInput-underline': {
@@ -50,6 +54,10 @@ function FirstResume(props) {
                   fontWeight: 'bold',
                   width: '32vw',
                 }
+              }}
+              onChange={(e) => {
+                setName(e.target.value);
+                dispatch(addDetails('BASIC', { name: e.target.value }));
               }}
             />
           </Grid>
@@ -91,6 +99,11 @@ function FirstResume(props) {
                     fontWeight: 600
                   }
                 }}
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  dispatch(addDetails('BASIC', { phone: e.target.value }));
+                }}
               />
               <img src={phone} alt="" />
             </span>
@@ -116,6 +129,11 @@ function FirstResume(props) {
                 }
                 // width: 'vw',
               },
+            }}
+            value={summary}
+            onChange={(e) => {
+              setSummary(e.target.value);
+              dispatch(addDetails('BASIC', { summary: e.target.value }));
             }}
           />
         </Grid>
@@ -150,7 +168,7 @@ function FirstResume(props) {
 
   const handleClick = (region) => {
     // e.preventDefault()
-    console.log("Click triggered")
+    // console.log("Click triggered")
     switch (region) {
       case 'edu':
         setToggleEduRow(true)
@@ -173,18 +191,25 @@ function FirstResume(props) {
   }
 
   const handleInput = (reg, values) => {
+    let temp;
     switch (reg) {
       case 'skill':
-        setSkillInp(values)
-        setSkill(values.split(',').map(item => item.trim()).filter(item => item.length > 0))
+        temp = values.split(',').map(item => item.trim()).filter(item => item.length > 0);
+        setSkillInp(values);
+        setSkill(temp);
+        dispatch(addDetails('SKILLS', [values, temp]));
         break;
       case 'awards':
-        setAwardsInp(values)
-        setAwards(values.split(';').filter(item => item.length > 0))
+        temp = values.split(';').filter(item => item.length > 0);
+        setAwardsInp(values);
+        setAwards(temp);
+        dispatch(addDetails('AWARDS', [values, temp]));
         break;
       case 'proj':
-        setProjInp(values)
-        setPersonalProj(values.split(';').filter(item => item.length > 0))
+        temp = values.split(';').filter(item => item.length > 0)
+        setProjInp(values);
+        setPersonalProj(temp);
+        dispatch(addDetails('PERSONAL_PROJECTS', [values, temp]))
         break;
       default:
         return
@@ -204,6 +229,10 @@ function FirstResume(props) {
     }
   }
 
+  useEffect(() => {
+    console.log("header data", headerData);
+  }, [headerData])
+  
   return (
     <ThemeProvider theme={TextFieldTheme}>
       <div className='body'>

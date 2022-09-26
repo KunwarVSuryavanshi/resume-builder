@@ -41,9 +41,13 @@ export default function addDetails(type, data) {
       };
     case 'PERSONAL_PROJECTS':
       return {
-        type: 'PERSONAL_PROJECTS',
+        type,
         data
       };
+    case 'CLEAR': 
+      return {
+        type
+      }
     default:
       return {};
   }

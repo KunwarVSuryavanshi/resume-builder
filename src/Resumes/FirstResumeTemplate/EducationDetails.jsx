@@ -20,8 +20,7 @@ function EducationDetails() {
             fontWeight: 500,
             fontSize: '1.4rem'
           }
-        }
-        }
+        }}
       // onClick={handleClick}
       // onBlur={handleOnBlur}
       />

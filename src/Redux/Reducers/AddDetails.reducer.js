@@ -7,9 +7,12 @@ const initialState = {
   },
   education: {},
   workExp: {},
-  skills: [],
-  awards: {},
-  projects: {}
+  skills: '',
+  skillsArr: [],
+  awards: '',
+  awardsArr: [],
+  projects: '',
+  projectsArr: [] 
 }
 
 export default function addDetailsReducer(state = initialState, actions){
@@ -19,10 +22,10 @@ export default function addDetailsReducer(state = initialState, actions){
         ...state,
         header: {
           ...state.header,
-          name: actions.data?.name,
-          email: actions.data?.email,
-          phone: actions.data?.phone,
-          summary: actions.data?.phone
+          name: actions.data?.name ?? state.header.name,
+          email: actions.data?.email ?? state.header.email,
+          phone: actions.data?.phone ?? state.header.phone,
+          summary: actions.data?.summary ?? state.header.summary
         }
       };
     case 'EDUCATION':
@@ -38,18 +41,38 @@ export default function addDetailsReducer(state = initialState, actions){
     case 'SKILLS':
       return {
         ...state,
-        skills: actions.data
+        skills: actions.data?.[0] ?? '',
+        skillsArr: actions.data?.[1] ?? []
       };
     case 'AWARDS':
       return {
         ...state,
-        awards: actions.data
+        awards: actions.data?.[0] ?? '',
+        awardsArr: actions.data?.[1] ?? []
       };
     case 'PERSONAL_PROJECTS':
       return {
         ...state,
-        projects: actions.projects
+        projects: actions.data?.[0] ?? '',
+        projectsArr: actions.data?.[1] ?? []
       };
+    case 'CLEAR':
+      return {
+        header: {
+          name: '',
+          email: '',
+          phone: '',
+          summary: ''
+        },
+        education: {},
+        workExp: {},
+        skills: '',
+        skillsArr: [],
+        awards: '',
+        awardsArr: [],
+        projects: '',
+        projectsArr: []
+      }
     default:
       return state;
   }
